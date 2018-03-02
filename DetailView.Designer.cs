@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridDetailView = new System.Windows.Forms.DataGridView();
             this.colUse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,34 +62,19 @@
             // 
             this.dataGridDetailView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridDetailView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            //this.dataGridDetailView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            //this.colUse,
-            //this.colSystem,
-            //this.colManageNumber,
-            //this.colSerial,
-            //this.colBoardType,
-            //this.colBoardSerial,
-            //this.colSplitter,
-            //this.colCPU,
-            //this.colRAM,
-            //this.colHDD,
-            //this.colVGA,
-            //this.colUser,
-            //this.colLoc,
-            //this.colIncomeDate,
-            //this.colNote});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridDetailView.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridDetailView.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridDetailView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridDetailView.Location = new System.Drawing.Point(0, 0);
             this.dataGridDetailView.MultiSelect = false;
             this.dataGridDetailView.Name = "dataGridDetailView";
+            this.dataGridDetailView.ReadOnly = true;
             this.dataGridDetailView.RowHeadersVisible = false;
             this.dataGridDetailView.RowTemplate.Height = 23;
             this.dataGridDetailView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -101,117 +86,102 @@
             // colUse
             // 
             this.colUse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.colUse.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.colUse.DefaultCellStyle = dataGridViewCellStyle2;
             this.colUse.HeaderText = "use";
             this.colUse.Name = "colUse";
             this.colUse.ReadOnly = true;
-            this.colUse.Width = 51;
             // 
             // colSystem
             // 
             this.colSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colSystem.HeaderText = "system";
             this.colSystem.Name = "colSystem";
-            this.colSystem.Width = 72;
             // 
             // colManageNumber
             // 
             this.colManageNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.colManageNumber.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.colManageNumber.DefaultCellStyle = dataGridViewCellStyle3;
             this.colManageNumber.HeaderText = "ManageNum";
             this.colManageNumber.Name = "colManageNumber";
             this.colManageNumber.ReadOnly = true;
-            this.colManageNumber.Width = 103;
             // 
             // colSerial
             // 
             this.colSerial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSerial.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSerial.DefaultCellStyle = dataGridViewCellStyle4;
             this.colSerial.HeaderText = "SerialNum";
             this.colSerial.Name = "colSerial";
-            this.colSerial.Width = 89;
             // 
             // colBoardType
             // 
             this.colBoardType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colBoardType.HeaderText = "BoardType";
             this.colBoardType.Name = "colBoardType";
-            this.colBoardType.Width = 92;
             // 
             // colBoardSerial
             // 
             this.colBoardSerial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.colBoardSerial.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.colBoardSerial.DefaultCellStyle = dataGridViewCellStyle5;
             this.colBoardSerial.HeaderText = "BoardSerialNum";
             this.colBoardSerial.Name = "colBoardSerial";
-            this.colBoardSerial.Width = 122;
             // 
             // colSplitter
             // 
             this.colSplitter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colSplitter.HeaderText = "Splitter";
             this.colSplitter.Name = "colSplitter";
-            this.colSplitter.Width = 68;
             // 
             // colCPU
             // 
             this.colCPU.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCPU.HeaderText = "CPU";
             this.colCPU.Name = "colCPU";
-            this.colCPU.Width = 55;
             // 
             // colRAM
             // 
             this.colRAM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colRAM.HeaderText = "RAM";
             this.colRAM.Name = "colRAM";
-            this.colRAM.Width = 57;
             // 
             // colHDD
             // 
             this.colHDD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colHDD.HeaderText = "HDD";
             this.colHDD.Name = "colHDD";
-            this.colHDD.Width = 54;
             // 
             // colVGA
             // 
             this.colVGA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colVGA.HeaderText = "VGA";
             this.colVGA.Name = "colVGA";
-            this.colVGA.Width = 55;
             // 
             // colUser
             // 
             this.colUser.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colUser.HeaderText = "UserName";
             this.colUser.Name = "colUser";
-            this.colUser.Width = 90;
             // 
             // colLoc
             // 
             this.colLoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colLoc.HeaderText = "Location";
             this.colLoc.Name = "colLoc";
-            this.colLoc.Width = 78;
             // 
             // colIncomeDate
             // 
             this.colIncomeDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colIncomeDate.HeaderText = "IncomingDate";
             this.colIncomeDate.Name = "colIncomeDate";
-            this.colIncomeDate.Width = 107;
             // 
             // colNote
             // 
             this.colNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colNote.HeaderText = "Note";
             this.colNote.Name = "colNote";
-            this.colNote.Width = 56;
             // 
             // contextMenuStrip1
             // 
@@ -220,28 +190,28 @@
             this.editDataToolStripMenuItem,
             this.deleteDataToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(139, 70);
             this.contextMenuStrip1.Click += new System.EventHandler(this.contextMenuStrip1_Click);
             // 
             // menuitemHistory
             // 
             this.menuitemHistory.Name = "menuitemHistory";
-            this.menuitemHistory.Size = new System.Drawing.Size(152, 22);
+            this.menuitemHistory.Size = new System.Drawing.Size(138, 22);
             this.menuitemHistory.Text = "view history";
             this.menuitemHistory.Click += new System.EventHandler(this.menuitemHistory_Click);
             // 
             // editDataToolStripMenuItem
             // 
             this.editDataToolStripMenuItem.Name = "editDataToolStripMenuItem";
-            this.editDataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.editDataToolStripMenuItem.Text = "edit data";
+            this.editDataToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.editDataToolStripMenuItem.Text = "edit";
             this.editDataToolStripMenuItem.Click += new System.EventHandler(this.editDataToolStripMenuItem_Click);
             // 
             // deleteDataToolStripMenuItem
             // 
             this.deleteDataToolStripMenuItem.Name = "deleteDataToolStripMenuItem";
-            this.deleteDataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.deleteDataToolStripMenuItem.Text = "delete data";
+            this.deleteDataToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.deleteDataToolStripMenuItem.Text = "delete";
             this.deleteDataToolStripMenuItem.Click += new System.EventHandler(this.deleteDataToolStripMenuItem_Click);
             // 
             // DetailView

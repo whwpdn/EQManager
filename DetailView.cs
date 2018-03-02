@@ -26,7 +26,6 @@ namespace EQManager
         {
             InitializeComponent();
             //ChangeUIType(iViewType);
-        
         }
 
         [Category("MyProperties"), Description("Change View Type")]
@@ -39,9 +38,39 @@ namespace EQManager
                 ChangeUIType();
             }
         }
+        public int GetColumnCount
+        {
+            get { return this.dataGridDetailView.ColumnCount; }
+        }
+
+        public int GetRowCount
+        {
+            get { return this.dataGridDetailView.RowCount; }
+        }
+
+        public string[] GetHeaderText(int idx = -1)
+        {
+            if (idx >= this.GetColumnCount) return new string[]{""};
+
+            if(idx ==-1)
+            {
+                string[] headers = new string[this.GetColumnCount];
+                for (int i = 0; i < this.GetColumnCount; i++ )
+                {
+                    headers[i] = this.dataGridDetailView.Columns[i].HeaderText;
+                }
+                return headers;
+            }
+            else
+            {
+                string[] headers = {dataGridDetailView.Columns[idx].HeaderText};
+                return headers;
+            }
+        }
 
         public void ChangeUIType()
         {
+            
             if(this.iViewType ==1)
             {
                 this.dataGridDetailView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,22 +40,23 @@
             this.tabViewDetail = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnUserSearch = new System.Windows.Forms.Button();
+            this.lbUser = new System.Windows.Forms.Label();
+            this.lbSearch = new System.Windows.Forms.Label();
+            this.comboUser = new System.Windows.Forms.ComboBox();
             this.cbBoardType = new System.Windows.Forms.CheckBox();
             this.cbManageNum = new System.Windows.Forms.CheckBox();
             this.cbSystem = new System.Windows.Forms.CheckBox();
             this.tbSearchWord = new System.Windows.Forms.TextBox();
             this.comboCondition = new System.Windows.Forms.ComboBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.detailEquipment = new EQManager.DetailView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.detailBoard = new EQManager.DetailView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lvBoard = new System.Windows.Forms.ListView();
-            this.comboUser = new System.Windows.Forms.ComboBox();
-            this.lbSearch = new System.Windows.Forms.Label();
-            this.lbUser = new System.Windows.Forms.Label();
-            this.detailEquipment = new EQManager.DetailView();
-            this.detailBoard = new EQManager.DetailView();
             this.menuStrip1.SuspendLayout();
             this.tabViewDetail.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -90,9 +92,18 @@
             // 
             // exportToolStripMenuItem
             // 
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.excelToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.exportToolStripMenuItem.Text = "Export";
+            // 
+            // excelToolStripMenuItem
+            // 
+            this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.excelToolStripMenuItem.Text = "Excel";
+            this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -153,7 +164,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1017, 430);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "equipment";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
@@ -165,6 +176,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnUserSearch);
             this.splitContainer1.Panel1.Controls.Add(this.lbUser);
             this.splitContainer1.Panel1.Controls.Add(this.lbSearch);
             this.splitContainer1.Panel1.Controls.Add(this.comboUser);
@@ -181,6 +193,42 @@
             this.splitContainer1.Size = new System.Drawing.Size(1011, 424);
             this.splitContainer1.SplitterDistance = 61;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnUserSearch
+            // 
+            this.btnUserSearch.Location = new System.Drawing.Point(181, 28);
+            this.btnUserSearch.Name = "btnUserSearch";
+            this.btnUserSearch.Size = new System.Drawing.Size(75, 20);
+            this.btnUserSearch.TabIndex = 9;
+            this.btnUserSearch.Text = "Search";
+            this.btnUserSearch.UseVisualStyleBackColor = true;
+            this.btnUserSearch.Click += new System.EventHandler(this.btnUserSearch_Click);
+            // 
+            // lbUser
+            // 
+            this.lbUser.AutoSize = true;
+            this.lbUser.Location = new System.Drawing.Point(3, 32);
+            this.lbUser.Name = "lbUser";
+            this.lbUser.Size = new System.Drawing.Size(31, 12);
+            this.lbUser.TabIndex = 8;
+            this.lbUser.Text = "User";
+            // 
+            // lbSearch
+            // 
+            this.lbSearch.AutoSize = true;
+            this.lbSearch.Location = new System.Drawing.Point(3, 6);
+            this.lbSearch.Name = "lbSearch";
+            this.lbSearch.Size = new System.Drawing.Size(45, 12);
+            this.lbSearch.TabIndex = 7;
+            this.lbSearch.Text = "Search";
+            // 
+            // comboUser
+            // 
+            this.comboUser.FormattingEnabled = true;
+            this.comboUser.Location = new System.Drawing.Point(54, 29);
+            this.comboUser.Name = "comboUser";
+            this.comboUser.Size = new System.Drawing.Size(121, 20);
+            this.comboUser.TabIndex = 6;
             // 
             // cbBoardType
             // 
@@ -243,6 +291,15 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // detailEquipment
+            // 
+            this.detailEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.detailEquipment.Location = new System.Drawing.Point(0, 0);
+            this.detailEquipment.Name = "detailEquipment";
+            this.detailEquipment.Size = new System.Drawing.Size(1011, 359);
+            this.detailEquipment.TabIndex = 0;
+            this.detailEquipment.ViewType = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.detailBoard);
@@ -251,8 +308,17 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1017, 430);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "board";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // detailBoard
+            // 
+            this.detailBoard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.detailBoard.Location = new System.Drawing.Point(3, 3);
+            this.detailBoard.Name = "detailBoard";
+            this.detailBoard.Size = new System.Drawing.Size(1011, 424);
+            this.detailBoard.TabIndex = 0;
+            this.detailBoard.ViewType = 1;
             // 
             // tabControl1
             // 
@@ -273,7 +339,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(192, 430);
             this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.Text = "equipment";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage4
@@ -284,7 +350,7 @@
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(192, 430);
             this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.Text = "board";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // lvBoard
@@ -297,50 +363,6 @@
             this.lvBoard.UseCompatibleStateImageBehavior = false;
             this.lvBoard.View = System.Windows.Forms.View.List;
             this.lvBoard.SelectedIndexChanged += new System.EventHandler(this.lvBoard_SelectedIndexChanged);
-            // 
-            // comboUser
-            // 
-            this.comboUser.FormattingEnabled = true;
-            this.comboUser.Location = new System.Drawing.Point(54, 29);
-            this.comboUser.Name = "comboUser";
-            this.comboUser.Size = new System.Drawing.Size(121, 20);
-            this.comboUser.TabIndex = 6;
-            // 
-            // lbSearch
-            // 
-            this.lbSearch.AutoSize = true;
-            this.lbSearch.Location = new System.Drawing.Point(3, 6);
-            this.lbSearch.Name = "lbSearch";
-            this.lbSearch.Size = new System.Drawing.Size(45, 12);
-            this.lbSearch.TabIndex = 7;
-            this.lbSearch.Text = "Search";
-            // 
-            // lbUser
-            // 
-            this.lbUser.AutoSize = true;
-            this.lbUser.Location = new System.Drawing.Point(3, 32);
-            this.lbUser.Name = "lbUser";
-            this.lbUser.Size = new System.Drawing.Size(31, 12);
-            this.lbUser.TabIndex = 8;
-            this.lbUser.Text = "User";
-            // 
-            // detailEquipment
-            // 
-            this.detailEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailEquipment.Location = new System.Drawing.Point(0, 0);
-            this.detailEquipment.Name = "detailEquipment";
-            this.detailEquipment.Size = new System.Drawing.Size(1011, 359);
-            this.detailEquipment.TabIndex = 0;
-            this.detailEquipment.ViewType = 0;
-            // 
-            // detailBoard
-            // 
-            this.detailBoard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailBoard.Location = new System.Drawing.Point(3, 3);
-            this.detailBoard.Name = "detailBoard";
-            this.detailBoard.Size = new System.Drawing.Size(1011, 424);
-            this.detailBoard.TabIndex = 0;
-            this.detailBoard.ViewType = 1;
             // 
             // Form1
             // 
@@ -400,6 +422,8 @@
         private System.Windows.Forms.Label lbUser;
         private System.Windows.Forms.Label lbSearch;
         private System.Windows.Forms.ComboBox comboUser;
+        private System.Windows.Forms.Button btnUserSearch;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
     }
 }
 

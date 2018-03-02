@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace EQManager
 {
@@ -31,7 +27,7 @@ namespace EQManager
         {
             dbConn = new DBConnect();
 
-            this.detailEquipment.HistoryData = new ShowHistoryData(this.SetHistory);
+            this.detailEquipment.HistoryData = new ShowHistoryData(this.SetEquipmentHistory);
             this.detailEquipment.editEquipmentData = new EditData(this.EditEquipmentData);
             this.detailEquipment.delEquipmentData = new DeleteData(this.DeleteEquipmentData);
             this.comboCondition.SelectedIndex = 0;
@@ -125,7 +121,7 @@ namespace EQManager
                 UpdateDataGridView();
 
         }
-        private void SetHistory(string strManageNum)
+        private void SetEquipmentHistory(string strManageNum)
         {
             List<string[]> resultlist = dbConn.GetEquipmentHistory(strManageNum);
             DetailView historyView = new DetailView();
@@ -141,6 +137,23 @@ namespace EQManager
 
             historyForm.Show();
         }
+
+        //private void SetBoardHistory(string strManageNum)
+        //{
+        //    //List<string[]> resultlist = dbConn.GetBoardHistory(strManageNum);
+        //    DetailView historyView = new DetailView();
+
+        //    historyView.InsertColumn("date", 0);
+
+        //    historyView.SetEquipmentHistoryData(resultlist);
+
+        //    Form historyForm = new Form();
+        //    historyForm.Controls.Add(historyView);
+        //    historyForm.AutoSize = true;
+        //    historyForm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
+        //    historyForm.Show();
+        //}
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -235,6 +248,111 @@ namespace EQManager
             }
         }
 
-      
+        private void btnUserSearch_Click(object sender, EventArgs e)
+        {
+            int userId= this.comboUser.SelectedIndex;
+            if(userId==0)
+            {
+                List<string[]> result = dbConn.GetEquipmentDetailsConditions("");
+                this.detailEquipment.SetEquipmentData(result);
+            }
+            else
+            {
+                string strCondition = string.Format("WHERE userid={0}", userId);
+                List<string[]> result = dbConn.GetEquipmentDetailsConditions(strCondition);
+                this.detailEquipment.SetEquipmentData(result);
+            }
+        }
+
+        private void excelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "noname";
+            dlg.DefaultExt = "xls";
+            dlg.Filter = "Excel files (*.xls|*.xls";
+            //dlg.InitialDirectory = "c:\\";
+
+            if(dlg.ShowDialog() == DialogResult.OK)
+            {
+                int num = 0;
+                object missingType = Type.Missing;
+
+                Excel.Application objApp;
+                Excel._Workbook objBook;
+                Excel.Workbooks objBooks;
+                Excel.Sheets objSheets;
+                Excel._Worksheet objSheet;
+                Excel.Range range;
+                int colCnt = detailEquipment.GetColumnCount;
+                int rowCnt = detailEquipment.GetRowCount;
+                string[] headers = detailEquipment.GetHeaderText();
+                string[] columns = new string[colCnt];
+                for(int c=0; c<colCnt ; c++)
+                {
+                    num = c + 65;
+                    columns[c] = Convert.ToString((char)num);
+                }
+                
+                try
+                {
+                    objApp = new Excel.Application();
+                    objBooks = objApp.Workbooks;
+                    objBook = objBooks.Add(Missing.Value);
+                    objSheets = objBook.Worksheets;
+                    //objSheet = (Excel._Worksheet)objSheets.get_Item(1);
+                    objSheet = (Excel._Worksheet)objSheets.Add(objSheets[1],Type.Missing, Type.Missing,Type.Missing);
+                    objSheet.Name = "all";
+                    range = objSheet.get_Range(columns[0] + "1:"+columns[colCnt-1]+"1", Missing.Value);
+                    range.Value2 = headers;
+
+                    for (int i = 0; i < rowCnt; i++)
+                    {
+                        string strRange = columns[0] + (i+2) + ":" + columns[colCnt - 1] + (i+2);
+                        range = objSheet.get_Range(strRange, Missing.Value);
+                        range.Value2 = this.detailEquipment.GetRowData(i);
+                    }
+
+
+                    // 시트 추가할때 
+                    //objSheet = (Excel._Worksheet)objSheets.Add(objSheets[2], Type.Missing, Type.Missing, Type.Missing);
+                    //range = objSheet.get_Range(columns[0] + "1:" + columns[colCnt - 1] + "1", Missing.Value);
+                    //range.Value2 = headers;
+                    //objSheet.Name = "Model";
+                    //for (int i = 0; i < rowCnt;i++)
+                    //{
+                    //    string strRange = columns[0] + (i + 2) + ":" + columns[colCnt - 1] + (i + 2);
+                    //    range = objSheet.get_Range(strRange, Missing.Value);
+                    //    range.Value2 = this.detailEquipment.GetRowData(i);
+                    //}
+
+                    objApp.Visible = false;
+                    objApp.UserControl = false;
+                    objBook.SaveAs(@dlg.FileName,
+                        Excel.XlFileFormat.xlWorkbookNormal,
+                        Type.Missing, Type.Missing, false, false,
+                        Excel.XlSaveAsAccessMode.xlNoChange,
+                        false, false, Type.Missing, Type.Missing, Type.Missing);
+                       
+                    objBook.Close(false, missingType, missingType);
+                    Cursor.Current = Cursors.Default;
+                    MessageBox.Show("Save Success!!!");
+
+                    //for(int i=0; i<rowCnt -1; i++)
+                    //{
+                    //    for(int j =0; j<colCnt;j++)
+                    //    {
+                    //        range = objSheet.get_Range(columns[j] + Convert.ToString(i + 2), Missing.Value);
+                    //        objSheet.get_Range()
+                    //        range.set_Value(Missing.Value,detailEquipment.GetRowData(i).Cells[j].Value.ToString());
+                    //        range.
+                    //    }
+                    //}
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
     }
 }
