@@ -125,8 +125,8 @@ namespace EQManager
         {
             List<string[]> resultlist = dbConn.GetEquipmentHistory(strManageNum);
             DetailView historyView = new DetailView();
-
-            historyView.InsertColumn("date",0);
+            historyView.ViewType = ViewType.History;
+            //historyView.InsertColumn("date",0);
 
             historyView.SetEquipmentHistoryData(resultlist);
 
@@ -264,6 +264,122 @@ namespace EQManager
             }
         }
 
+        private void ExportExcelFile(List<string[]> data, ref Excel._Worksheet objSheet)
+        {
+            int num = 0;
+            object missingType = Type.Missing;
+
+            int colCnt = detailEquipment.GetColumnCount;
+            int rowCnt = data.Count;
+            string[] headers = detailEquipment.GetHeaderText();
+            string[] columns = new string[colCnt];
+            for (int c = 0; c < colCnt; c++)
+            {
+                num = c + 65;
+                columns[c] = Convert.ToString((char)num);
+            }
+
+            try
+            {
+                Excel.Range range;
+                range = objSheet.get_Range(columns[0] + "1:" + columns[colCnt - 1] + "1", Missing.Value);
+                range.Value2 = headers;
+
+                for (int i = 0; i < rowCnt; i++)
+                {
+                    string strRange = columns[0] + (i + 2) + ":" + columns[colCnt - 1] + (i + 2);
+                    range = objSheet.get_Range(strRange, Missing.Value);
+                    range.Value2 = data[i];
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        //private void ExportExcelFile()
+        //{
+        //    int num = 0;
+        //    object missingType = Type.Missing;
+
+        //    Excel.Application objApp;
+        //    Excel._Workbook objBook;
+        //    Excel.Workbooks objBooks;
+        //    Excel.Sheets objSheets;
+        //    Excel._Worksheet objSheet;
+        //    Excel.Range range;
+        //    int colCnt = detailEquipment.GetColumnCount;
+        //    int rowCnt = detailEquipment.GetRowCount;
+        //    string[] headers = detailEquipment.GetHeaderText();
+        //    string[] columns = new string[colCnt];
+        //    for (int c = 0; c < colCnt; c++)
+        //    {
+        //        num = c + 65;
+        //        columns[c] = Convert.ToString((char)num);
+        //    }
+
+        //    try
+        //    {
+        //        objApp = new Excel.Application();
+        //        objBooks = objApp.Workbooks;
+        //        objBook = objBooks.Add(Missing.Value);
+        //        objSheets = objBook.Worksheets;
+        //        //objSheet = (Excel._Worksheet)objSheets.get_Item(1);
+        //        objSheet = (Excel._Worksheet)objSheets.Add(objSheets[1], Type.Missing, Type.Missing, Type.Missing);
+        //        objSheet.Name = "all";
+        //        range = objSheet.get_Range(columns[0] + "1:" + columns[colCnt - 1] + "1", Missing.Value);
+        //        range.Value2 = headers;
+
+        //        for (int i = 0; i < rowCnt; i++)
+        //        {
+        //            string strRange = columns[0] + (i + 2) + ":" + columns[colCnt - 1] + (i + 2);
+        //            range = objSheet.get_Range(strRange, Missing.Value);
+        //            range.Value2 = this.detailEquipment.GetRowData(i);
+        //        }
+
+
+        //        // 시트 추가할때 
+        //        //objSheet = (Excel._Worksheet)objSheets.Add(objSheets[2], Type.Missing, Type.Missing, Type.Missing);
+        //        //range = objSheet.get_Range(columns[0] + "1:" + columns[colCnt - 1] + "1", Missing.Value);
+        //        //range.Value2 = headers;
+        //        //objSheet.Name = "Model";
+        //        //for (int i = 0; i < rowCnt;i++)
+        //        //{
+        //        //    string strRange = columns[0] + (i + 2) + ":" + columns[colCnt - 1] + (i + 2);
+        //        //    range = objSheet.get_Range(strRange, Missing.Value);
+        //        //    range.Value2 = this.detailEquipment.GetRowData(i);
+        //        //}
+
+        //        objApp.Visible = false;
+        //        objApp.UserControl = false;
+        //        objBook.SaveAs(@dlg.FileName,
+        //            Excel.XlFileFormat.xlWorkbookNormal,
+        //            Type.Missing, Type.Missing, false, false,
+        //            Excel.XlSaveAsAccessMode.xlNoChange,
+        //            false, false, Type.Missing, Type.Missing, Type.Missing);
+
+        //        objBook.Close(false, missingType, missingType);
+        //        Cursor.Current = Cursors.Default;
+        //        MessageBox.Show("Save Success!!!");
+
+        //        //for(int i=0; i<rowCnt -1; i++)
+        //        //{
+        //        //    for(int j =0; j<colCnt;j++)
+        //        //    {
+        //        //        range = objSheet.get_Range(columns[j] + Convert.ToString(i + 2), Missing.Value);
+        //        //        objSheet.get_Range()
+        //        //        range.set_Value(Missing.Value,detailEquipment.GetRowData(i).Cells[j].Value.ToString());
+        //        //        range.
+        //        //    }
+        //        //}
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //}
+
         private void excelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -274,84 +390,32 @@ namespace EQManager
 
             if(dlg.ShowDialog() == DialogResult.OK)
             {
-                int num = 0;
-                object missingType = Type.Missing;
-
-                Excel.Application objApp;
-                Excel._Workbook objBook;
-                Excel.Workbooks objBooks;
-                Excel.Sheets objSheets;
+                Excel.Application objApp = new Excel.Application();
+                Excel.Workbooks objBooks = objApp.Workbooks;
+                Excel._Workbook objBook = objBook = objBooks.Add(Missing.Value);
+                Excel.Sheets objSheets = objBook.Worksheets;
                 Excel._Worksheet objSheet;
-                Excel.Range range;
-                int colCnt = detailEquipment.GetColumnCount;
-                int rowCnt = detailEquipment.GetRowCount;
-                string[] headers = detailEquipment.GetHeaderText();
-                string[] columns = new string[colCnt];
-                for(int c=0; c<colCnt ; c++)
-                {
-                    num = c + 65;
-                    columns[c] = Convert.ToString((char)num);
-                }
                 
-                try
+                for(int i=0; i<lvModel.Items.Count ; i++)
                 {
-                    objApp = new Excel.Application();
-                    objBooks = objApp.Workbooks;
-                    objBook = objBooks.Add(Missing.Value);
-                    objSheets = objBook.Worksheets;
-                    //objSheet = (Excel._Worksheet)objSheets.get_Item(1);
-                    objSheet = (Excel._Worksheet)objSheets.Add(objSheets[1],Type.Missing, Type.Missing,Type.Missing);
-                    objSheet.Name = "all";
-                    range = objSheet.get_Range(columns[0] + "1:"+columns[colCnt-1]+"1", Missing.Value);
-                    range.Value2 = headers;
-
-                    for (int i = 0; i < rowCnt; i++)
-                    {
-                        string strRange = columns[0] + (i+2) + ":" + columns[colCnt - 1] + (i+2);
-                        range = objSheet.get_Range(strRange, Missing.Value);
-                        range.Value2 = this.detailEquipment.GetRowData(i);
-                    }
-
-
-                    // 시트 추가할때 
-                    //objSheet = (Excel._Worksheet)objSheets.Add(objSheets[2], Type.Missing, Type.Missing, Type.Missing);
-                    //range = objSheet.get_Range(columns[0] + "1:" + columns[colCnt - 1] + "1", Missing.Value);
-                    //range.Value2 = headers;
-                    //objSheet.Name = "Model";
-                    //for (int i = 0; i < rowCnt;i++)
-                    //{
-                    //    string strRange = columns[0] + (i + 2) + ":" + columns[colCnt - 1] + (i + 2);
-                    //    range = objSheet.get_Range(strRange, Missing.Value);
-                    //    range.Value2 = this.detailEquipment.GetRowData(i);
-                    //}
-
-                    objApp.Visible = false;
-                    objApp.UserControl = false;
-                    objBook.SaveAs(@dlg.FileName,
-                        Excel.XlFileFormat.xlWorkbookNormal,
-                        Type.Missing, Type.Missing, false, false,
-                        Excel.XlSaveAsAccessMode.xlNoChange,
-                        false, false, Type.Missing, Type.Missing, Type.Missing);
-                       
-                    objBook.Close(false, missingType, missingType);
-                    Cursor.Current = Cursors.Default;
-                    MessageBox.Show("Save Success!!!");
-
-                    //for(int i=0; i<rowCnt -1; i++)
-                    //{
-                    //    for(int j =0; j<colCnt;j++)
-                    //    {
-                    //        range = objSheet.get_Range(columns[j] + Convert.ToString(i + 2), Missing.Value);
-                    //        objSheet.get_Range()
-                    //        range.set_Value(Missing.Value,detailEquipment.GetRowData(i).Cells[j].Value.ToString());
-                    //        range.
-                    //    }
-                    //}
+                    objSheet = (Excel._Worksheet)objSheets.Add(objSheets[i+1], Type.Missing, Type.Missing, Type.Missing);
+                    objSheet.Name = lvModel.Items[i].Text;
+                    List<string[]> resultlist = dbConn.GetEquipmentDetails(lvModel.Items[i].Text);
+                    ExportExcelFile(resultlist, ref objSheet);
                 }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+
+                objApp.Visible = false;
+                objApp.UserControl = false;
+                objBook.SaveAs(@dlg.FileName,
+                    Excel.XlFileFormat.xlWorkbookNormal,
+                    Type.Missing, Type.Missing, false, false,
+                    Excel.XlSaveAsAccessMode.xlNoChange,
+                    false, false, Type.Missing, Type.Missing, Type.Missing);
+
+                objBook.Close(false, Type.Missing, Type.Missing);
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show("Save Success!!!");
+                //ExportExcelFile();
             }
         }
     }

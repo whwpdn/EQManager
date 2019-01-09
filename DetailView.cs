@@ -12,7 +12,14 @@ using System.Collections;
 
 namespace EQManager
 {
+    public enum ViewType
+    {
+        Equipment = 0,
+        Board,
+        History
+    }
 
+   
     public partial class DetailView : UserControl
     {
 
@@ -21,7 +28,7 @@ namespace EQManager
         public DeleteData delEquipmentData;
 
         string strSelectedEquipment = "";
-        int iViewType = 0;
+        ViewType iViewType = ViewType.Equipment;
         public DetailView()
         {
             InitializeComponent();
@@ -29,11 +36,11 @@ namespace EQManager
         }
 
         [Category("MyProperties"), Description("Change View Type")]
-        public int ViewType
+        public ViewType ViewType
         {
             get { return iViewType; }
-            set 
-            { 
+            set
+            {
                 this.iViewType = value;
                 ChangeUIType();
             }
@@ -70,37 +77,61 @@ namespace EQManager
 
         public void ChangeUIType()
         {
-            
-            if(this.iViewType ==1)
+            //List<DataGridViewColumn> listCols = new List<DataGridViewColumn>();
+            //listCols.Add(this.colUse);
+            this.dataGridDetailView.Columns.Clear();
+
+            if(this.iViewType ==ViewType.Board)
             {
                 this.dataGridDetailView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                this.colUse,
-                this.colManageNumber,
-                this.colBoardType,
-                this.colBoardSerial,
-                this.colUser,
-                this.colLoc,
-                this.colIncomeDate,
-                this.colNote});
+                    this.colUse,
+                    this.colManageNumber,
+                    this.colBoardType,
+                    this.colBoardSerial,
+                    this.colUser,
+                    this.colLoc,
+                    this.colIncomeDate,
+                    this.colNote});
+                this.menuitemHistory.Visible = false;
             }
-            else if (this.iViewType == 0)
+            else if (this.iViewType == ViewType.Equipment)
             {
                 this.dataGridDetailView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                this.colUse,
-                this.colSystem,
-                this.colManageNumber,
-                this.colSerial,
-                this.colBoardType,
-                this.colBoardSerial,
-                this.colSplitter,
-                this.colCPU,
-                this.colRAM,
-                this.colHDD,
-                this.colVGA,
-                this.colUser,
-                this.colLoc,
-                this.colIncomeDate,
-                this.colNote});
+                    this.colUse,
+                    this.colSystem,
+                    this.colManageNumber,
+                    this.colSerial,
+                    this.colBoardType,
+                    this.colBoardSerial,
+                    this.colSplitter,
+                    this.colCPU,
+                    this.colRAM,
+                    this.colHDD,
+                    this.colVGA,
+                    this.colUser,
+                    this.colLoc,
+                    this.colIncomeDate,
+                    this.colNote});
+            }
+            else
+            {
+                this.dataGridDetailView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                    this.colDate,
+                    this.colUse,
+                    this.colSystem,
+                    this.colManageNumber,
+                    this.colSerial,
+                    this.colBoardType,
+                    this.colBoardSerial,
+                    this.colSplitter,
+                    this.colCPU,
+                    this.colRAM,
+                    this.colHDD,
+                    this.colVGA,
+                    this.colUser,
+                    this.colLoc,
+                    this.colIncomeDate,
+                    this.colNote});
             }
         }
         public void AddColumn(string strColName)
@@ -192,14 +223,7 @@ namespace EQManager
 
         private void contextMenuStrip1_Click(object sender, EventArgs e)
         {
-            //strSelectedEquipment;
             
-            //Form historyForm = new Form();
-            //historyForm.Controls.Add(new DetailView());
-            //historyForm.AutoSize = true;
-            //historyForm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-
-            //historyForm.Show();
         }
         public void SetEquipmentHistoryData(List<string[]> resultlist)
         {

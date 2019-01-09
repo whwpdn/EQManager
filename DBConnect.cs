@@ -9,7 +9,7 @@ namespace EQManager
 {
     class DBConnect
     {
-        string ConnectionInfo = "SERVER=localhost; DATABASE=equipment; UID=root; PASSWORD=mbc;";
+        string ConnectionInfo = "SERVER=localhost; DATABASE=equipment; UID=root; PASSWORD=mbcmbc;";
         MySqlConnection dbConnection;
         public DBConnect()
         {

@@ -57,6 +57,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lvBoard = new System.Windows.Forms.ListView();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
             this.tabViewDetail.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -158,6 +159,7 @@
             // 
             // tabPage1
             // 
+            //this.tabPage1.Controls.Add(this.statusStrip1);
             this.tabPage1.Controls.Add(this.splitContainer1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -298,7 +300,7 @@
             this.detailEquipment.Name = "detailEquipment";
             this.detailEquipment.Size = new System.Drawing.Size(1011, 359);
             this.detailEquipment.TabIndex = 0;
-            this.detailEquipment.ViewType = 0;
+            this.detailEquipment.ViewType = EQManager.ViewType.Equipment;
             // 
             // tabPage2
             // 
@@ -318,7 +320,7 @@
             this.detailBoard.Name = "detailBoard";
             this.detailBoard.Size = new System.Drawing.Size(1011, 424);
             this.detailBoard.TabIndex = 0;
-            this.detailBoard.ViewType = 1;
+            this.detailBoard.ViewType = EQManager.ViewType.Board;
             // 
             // tabControl1
             // 
@@ -364,6 +366,14 @@
             this.lvBoard.View = System.Windows.Forms.View.List;
             this.lvBoard.SelectedIndexChanged += new System.EventHandler(this.lvBoard_SelectedIndexChanged);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(3, 405);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1011, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -372,6 +382,7 @@
             this.Controls.Add(this.tabViewDetail);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -379,6 +390,7 @@
             this.menuStrip1.PerformLayout();
             this.tabViewDetail.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -424,6 +436,7 @@
         private System.Windows.Forms.ComboBox comboUser;
         private System.Windows.Forms.Button btnUserSearch;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 

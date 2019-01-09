@@ -31,8 +31,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnTransation = new System.Windows.Forms.Button();
-            this.detailView1 = new EQManager.DetailView();
             this.inputControl1 = new EQManager.InputControl();
+            this.detailView1 = new EQManager.DetailView();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -67,6 +67,13 @@
             this.btnTransation.UseVisualStyleBackColor = true;
             this.btnTransation.Click += new System.EventHandler(this.btnTransation_Click);
             // 
+            // inputControl1
+            // 
+            this.inputControl1.Location = new System.Drawing.Point(12, 12);
+            this.inputControl1.Name = "inputControl1";
+            this.inputControl1.Size = new System.Drawing.Size(539, 303);
+            this.inputControl1.TabIndex = 30;
+            // 
             // detailView1
             // 
             this.detailView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -76,13 +83,7 @@
             this.detailView1.Name = "detailView1";
             this.detailView1.Size = new System.Drawing.Size(530, 126);
             this.detailView1.TabIndex = 28;
-            // 
-            // inputControl1
-            // 
-            this.inputControl1.Location = new System.Drawing.Point(12, 12);
-            this.inputControl1.Name = "inputControl1";
-            this.inputControl1.Size = new System.Drawing.Size(539, 303);
-            this.inputControl1.TabIndex = 30;
+            this.detailView1.ViewType = EQManager.ViewType.Equipment;
             // 
             // AddDataForm
             // 

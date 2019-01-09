@@ -36,6 +36,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridDetailView = new System.Windows.Forms.DataGridView();
             this.colUse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDate= new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManageNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +83,13 @@
             this.dataGridDetailView.TabIndex = 1;
             this.dataGridDetailView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridDetailView_CellMouseDown);
             this.dataGridDetailView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridDetailView_MouseClick);
+            
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
             // 
             // colUse
             // 
@@ -232,6 +240,7 @@
         private System.Windows.Forms.DataGridView dataGridDetailView;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuitemHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSystem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManageNumber;
